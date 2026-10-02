@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeQuest — Habit Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-dot"></span> LifeQuest</div>
+      <button class="nav active" data-view="dashboard">▦ <span>Dashboard</span></button>
+      <button class="nav" data-view="habits">✓ <span>Habits</span></button>
+      <button class="nav" data-view="stats">↗ <span>Progress</span></button>
+      <button class="nav" data-view="settings">⚙ <span>Settings</span></button>
+      <div class="side-bottom">
+        <div class="level-card">
+          <div class="level-top"><span>LEVEL <b id="level">1</b></span><span id="xpText">0 / 100 XP</span></div>
+          <div class="xp-track"><div id="xpBar"></div></div>
+          <small>Build your streak one day at a time.</small>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">YOUR PERSONAL SYSTEM</div>
+          <h1 id="pageTitle">Daily Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="todayBtn">Today</button>
+          <div class="avatar">LQ</div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active-view">
+        <div class="hero">
+          <div>
+            <p class="muted" id="dateLabel"></p>
+            <h2>Turn your life into a game.</h2>
+            <p class="hero-copy">Complete your habits, earn XP, protect your streak, and watch your real-life progress grow.</p>
+          </div>
+          <div class="hero-score">
+            <span>Today's score</span>
+            <strong id="todayScore">0%</strong>
+            <small id="todayDone">0 / 6 completed</small>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <section class="panel habit-panel">
+            <div class="panel-head">
+              <div><h3>My Habits</h3><span class="pill" id="streakPill">0 day streak</span></div>
+              <button class="small-btn" id="addHabitBtn">+ Add</button>
+            </div>
+            <div id="habitList"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head"><div><h3>Daily Progress</h3><span class="muted">Last 7 days</span></div></div>
+            <div class="bar-chart" id="barChart"></div>
+            <div class="chart-labels" id="chartLabels"></div>
+          </section>
+        </div>
+
+        <div class="grid three">
+          <section class="panel stat"><span>Current streak</span><strong id="currentStreak">0</strong><small>days</small></section>
+          <section class="panel stat"><span>Best streak</span><strong id="bestStreak">0</strong><small>days</small></section>
+          <section class="panel stat"><span>XP earned</span><strong id="totalXp">0</strong><small>total XP</small></section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div><h3>Monthly Tracker</h3><span class="muted" id="monthTitle"></span></div>
+            <div class="month-controls"><button class="icon-btn" id="prevMonth">‹</button><button class="icon-btn" id="nextMonth">›</button></div>
+          </div>
+          <div class="calendar-wrap">
+            <div class="calendar" id="calendar"></div>
+          </div>
+        </section>
+      </section>
+
+      <section id="habits" class="view">
+        <section class="panel">
+          <div class="panel-head"><div><h3>Habit Manager</h3><span class="muted">Edit the rules of your game.</span></div><button class="small-btn" id="addHabitBtn2">+ Add Habit</button></div>
+          <div id="habitManager"></div>
+        </section>
+      </section>
+
+      <section id="stats" class="view">
+        <div class="grid two">
+          <section class="panel large-stat"><span>Completion rate</span><strong id="completionRate">0%</strong><div class="progress-line"><i id="completionLine"></i></div></section>
+          <section class="panel large-stat"><span>Perfect days</span><strong id="perfectDays">0</strong><small>days at 100%</small></section>
+        </div>
+        <section class="panel">
+          <div class="panel-head"><div><h3>Weekly Performance</h3><span class="muted">Your last 7 days</span></div></div>
+          <div class="big-chart" id="bigChart"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><div><h3>Wellness</h3><span class="muted">Track the basics too.</span></div></div>
+          <div class="wellness-grid">
+            <label>Mood <input id="mood" type="range" min="1" max="10" value="7"><b id="moodValue">7/10</b></label>
+            <label>Hours of sleep <input id="sleep" type="number" min="0" max="24" step=".5" value="8"><b>hours</b></label>
+          </div>
+        </section>
+      </section>
+
+      <section id="settings" class="view">
+        <section class="panel settings">
+          <h3>Settings</h3>
+          <label>Display name<input id="displayName" value="Player One"></label>
+          <button class="danger" id="resetBtn">Reset all progress</button>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="habitDialog">
+    <form method="dialog" id="habitForm">
+      <h3 id="dialogTitle">Add Habit</h3>
+      <input type="hidden" id="habitId">
+      <label>Habit name<input id="habitName" required placeholder="e.g. Read / Learn"></label>
+      <label>Emoji<input id="habitEmoji" maxlength="4" value="✓"></label>
+      <label>XP per completion<input id="habitXp" type="number" min="1" max="100" value="15"></label>
+      <div class="dialog-actions"><button class="secondary" value="cancel">Cancel</button><button class="primary" id="saveHabit" value="default">Save</button></div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
